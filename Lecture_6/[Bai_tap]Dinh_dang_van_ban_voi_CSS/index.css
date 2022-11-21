@@ -1,0 +1,30 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 50%;
+    text-align: justify;
+    margin-left: 15px;
+}
+p{
+    font-size: 1.2em;
+    text-indent: 50px;
+    padding-bottom: 10px;
+}
+a{
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:link,a:visited {
+    text-decoration: none;
+   color: blue;
+}
+.note{
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}

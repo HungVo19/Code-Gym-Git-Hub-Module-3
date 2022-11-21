@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    text-align: left;
+    font-size: 15px;
+    font-family: Trebuchet, Verdana, Arial, monospace;
+}
+#globalContainer{
+    min-height: 100px;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+}
