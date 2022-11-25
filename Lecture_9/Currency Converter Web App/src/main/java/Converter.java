@@ -10,7 +10,7 @@ public class Converter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
 
     @Override
@@ -25,9 +25,9 @@ public class Converter extends HttpServlet {
         } else {
             float usd = Float.parseFloat(request.getParameter("usd"));
             float vnd = usd * rate;
-            request.setAttribute("result",vnd);
+            request.setAttribute("result", vnd);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         }
     }
 
