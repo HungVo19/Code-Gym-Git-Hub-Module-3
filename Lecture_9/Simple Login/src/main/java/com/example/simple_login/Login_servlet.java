@@ -5,21 +5,21 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 @WebServlet(name = "Login_servlet", value = "/Login_servlet")
 public class Login_servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String username = request.getParameter("username");
-String password = request.getParameter("password");
-        PrintWriter writer = response.getWriter();
-        writer.println("<html>");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         if(username.equals("hungvo")&&password.equals("hungvo")){
-            writer.println("<h1>Welcome " + username + " to website</h1>" );
+            request.setAttribute("loginTime",new Date());
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminpage.jsp");
+            requestDispatcher.forward(request,response);
         } else {
-            writer.println("<h1>Login error</h1>");
+           response.sendRedirect("index.jsp");
         }
-        writer.println("</html>");
     }
 
     @Override

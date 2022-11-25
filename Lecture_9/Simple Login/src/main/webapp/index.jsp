@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<form method="post" action="Login_servlet">
+<form method="get" action="Login_servlet">
     <div class="login">
         <h2>Login</h2>
         <label>

@@ -1,14 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>JSP - Hello World</title>
-</head>
+<head><meta charset="UTF-8"><title>c:out example</title></head>
 <body>
-<h1><%= "Hello new World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet 1</a>
-<a href="hello-servlet">Hello Servlet 2</a>
+<c:set var = "salary" scope = "session" value = "${2000*2}"/>
+<c:if test = "${salary > 2000}">
+<p>My salary is:  <c:out value = "${salary}"/><p>
+    </c:if>
 </body>
 </html>

@@ -9,25 +9,26 @@ import java.util.regex.Pattern;
 public class Converter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        float rate = Float.parseFloat(request.getParameter("rate"));
-        if (parseDouble(request.getParameter("usd")) == null) {
-            PrintWriter printWriter = response.getWriter();
-            printWriter.println("<html>");
-            printWriter.println("<h1>Wrong input type</h1>");
-            printWriter.println("</html>");
-        } else {
-            float usd = Float.parseFloat(request.getParameter("usd"));
-            float vnd = usd * rate;
-            PrintWriter printWriter = response.getWriter();
-            printWriter.println("<html>");
-            printWriter.println("<h1>" + usd + " USD = " + vnd + " VND");
-            printWriter.println("</html>");
-        }
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        float rate = Float.parseFloat(request.getParameter("rate"));
+        PrintWriter printWriter = response.getWriter();
+        if (parseDouble(request.getParameter("usd")) == null) {
+            printWriter.println("<script type=\"text/javascript\">");
+            printWriter.println("alert('Wrong input')");
+            printWriter.println("window.location.href = \"index.jsp\";");
+            printWriter.println("</script>");
+        } else {
+            float usd = Float.parseFloat(request.getParameter("usd"));
+            float vnd = usd * rate;
+            request.setAttribute("result",vnd);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            requestDispatcher.forward(request,response);
+        }
     }
 
     private Double parseDouble(String myString) {

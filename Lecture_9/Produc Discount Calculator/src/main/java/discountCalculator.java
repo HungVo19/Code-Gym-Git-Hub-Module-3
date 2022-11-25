@@ -25,14 +25,14 @@ public class discountCalculator extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-String product = request.getParameter("product");
-Float price = Float.parseFloat(request.getParameter("price"));
-float discount = Float.parseFloat(request.getParameter("discount"));
-list.put(product,price);
+        String product = request.getParameter("product");
+        Float price = Float.parseFloat(request.getParameter("price"));
+        float discount = Float.parseFloat(request.getParameter("discount"));
+        list.put(product,price);
         PrintWriter printWriter = response.getWriter();
-for(Map.Entry<String, Float> entry: list.entrySet()){
-    printWriter.println("Product: "+entry.getKey() + "; List Price: " + entry.getValue() + "; Sale price: " +(entry.getValue()*(100-discount)/100));
-    printWriter.println("<br>");
-};
+        for(Map.Entry<String, Float> entry: list.entrySet()){
+            printWriter.println("Product: "+entry.getKey() + "; List Price: " + entry.getValue() + "; Sale price: " +(entry.getValue()*(100-discount)/100));
+            printWriter.println("<br>");
+        }
     }
 }
