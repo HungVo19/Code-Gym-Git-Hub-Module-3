@@ -5,6 +5,7 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+<a href="ManageProduct.jsp">Click here</a>
 <h1>Add New Product</h1>
 <form action="ProductServlet" method="get">
     <input type="hidden" name="action" value="add">
