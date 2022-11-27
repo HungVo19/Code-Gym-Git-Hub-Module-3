@@ -12,7 +12,7 @@
     body {
       color: #566787;
       font-family: 'Varela Round', sans-serif;
-      font-size: 15px;
+      font-size: 20px;
     }
     a, a:hover {
       text-decoration: none;
@@ -20,43 +20,11 @@
     }
   </style>
 </head>
-<%--<body>--%>
-<%--<header>--%>
-<%--  <nav class="navbar navbar-expand-md navbar-dark"--%>
-<%--       style="background-color: #2c3e50">--%>
-<%--    <div>--%>
-<%--      <a href="${pageContext.request.contextPath}/ProductServlet?action=reload" class="navbar-brand"> Product <b>Manager</b>--%>
-<%--      </a>--%>
-<%--    </div>--%>
-<%--  </nav>--%>
-<%--</header>--%>
-<%--<br>--%>
-<%--<div class="card container col-sm-3 bg-light text-center">--%>
-<%--  <div class="card">--%>
-<%--    <div class="card-body">--%>
-<%--      <form method="get" action="LoginServlet">--%>
-<%--        <div class="login">--%>
-<%--          <h2>Login</h2>--%>
-<%--          <label>--%>
-<%--            <input type="text" name="username" placeholder="username" required="required">--%>
-<%--          </label>--%>
-<%--          <label>--%>
-<%--            <input type="password" name="password" placeholder="password" required="required">--%>
-<%--          </label>--%>
-<%--          <br>--%>
-<%--          <input id="submit" type="submit" value="Sign in">--%>
-<%--        </div>--%>
-<%--      </form>--%>
-<%--    </div>--%>
-<%--  </div>--%>
-
-<%--</div>--%>
-<%--</body>--%>
 <body>
 <div class="sidenav">
   <div class="login-main-text">
     <h2>Product Manager<br> Login Page</h2>
-    <p>Login or register from here to access.</p>
+    <p>Login from here to access.</p>
   </div>
 </div>
 <div class="main">

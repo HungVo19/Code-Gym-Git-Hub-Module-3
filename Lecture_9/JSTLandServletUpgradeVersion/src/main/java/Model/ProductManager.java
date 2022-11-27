@@ -1,18 +1,25 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductManager {
+public class ProductManager implements Serializable {
     private final ArrayList<Product> products;
-
+    private final IOFile<Product> file;
+    private final String filePath = "D:\\Code Gym\\Code-Gym-Git-Hub-Module-3\\Lecture_9\\JSTLandServletUpgradeVersion\\src\\main\\java\\Data\\ProductsList.txt";
 
     public ProductManager(){
-        products = new ArrayList<>();
-        products.add(new Product("iPhone 14",799D,99));
-        products.add(new Product("iPhone 14 Pro",999D,99));
-        products.add(new Product("MacBook Air M1",999D,100));
-        products.add(new Product("iPad Pro",799D,99));
-        products.add(new Product("Apple Watch SE",249D,99));
+        file = new IOFile<Product>();
+        products = (ArrayList<Product>) file.readFromFile(filePath);
+        resetStaticIndex();
+    }
+
+    public IOFile<Product> getFile() {
+        return file;
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
     public ArrayList<Product> getProducts() {
@@ -28,5 +35,11 @@ public class ProductManager {
             }
         }
         return index;
+    }
+
+    private void resetStaticIndex() {
+        if (!products.isEmpty()) {
+            Product.INDEX = products.get(products.size() - 1).getId();
+        }
     }
 }

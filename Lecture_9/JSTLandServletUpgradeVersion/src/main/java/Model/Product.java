@@ -1,7 +1,9 @@
 package Model;
 
-public class Product {
-    private static  Long INDEX = Long.valueOf(0);
+import java.io.Serializable;
+
+public class Product implements Serializable {
+    public static  Long INDEX = Long.valueOf(0);
     private Long id;
     private String name;
     private Double price;

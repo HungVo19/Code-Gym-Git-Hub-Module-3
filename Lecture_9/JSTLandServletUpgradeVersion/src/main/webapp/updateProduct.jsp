@@ -49,9 +49,9 @@
                 <h2>Current Data</h2>
             </caption>
             <ul class="list-group list-group-flush bg-light">
-                <li class="list-group-item bg-light">Index: <p><c:out value="${index}"/></li>
+                <li class="list-group-item bg-light">ID: <p><c:out value="${id}"/></li>
                 <li class="list-group-item bg-light">Name: <p><c:out value="${name}"/></li>
-                <li class="list-group-item bg-light">Price: <p><c:out value="${price}"/>  $</li>
+                <li class="list-group-item bg-light">Price: <p><c:out value="${price}"/> $</li>
                 <li class="list-group-item bg-light">Quantity: <p><c:out value="${quantity}"/></li>
             </ul>
         </div>
@@ -63,6 +63,7 @@
             <form action="${pageContext.request.contextPath}/ProductServlet" method="get">
                 <input type="hidden" name="action" value="updateX">
                 <input type="hidden" name="index" value="${index}">
+                <input type="hidden" name="id" value="${id}">
                 <caption>
                     <h2>
                         Update Data
@@ -70,26 +71,24 @@
                 </caption>
 
                 <fieldset class="form-group">
-                    <label>New Name</label> <input type="text" class="form-control" name="newName" required="required">
+                    <label>New Name</label> <input type="text" class="form-control" name="newName">
                 </fieldset>
 
                 <fieldset class="form-group">
-                    <label>New Price</label> <input type="text" class="form-control" name="newPrice" required="required">
+                    <label>New Price</label> <input type="text" class="form-control" name="newPrice">
                 </fieldset>
 
                 <fieldset class="form-group">
-                    <label>New Quantity</label> <input type="text" class="form-control" name="newQuantity" required="required">
+                    <label>New Quantity</label> <input type="text" class="form-control" name="newQuantity">
                 </fieldset>
                 <br>
                 <button type="submit" class="btn btn-success">Save</button>
-                <button type="reset" class="btn btn-warning"><a
+                <button type="reset" class="btn btn-secondary"><a
                         href="${pageContext.request.contextPath}/ProductServlet?action=reload">Cancel</a></button>
             </form>
         </div>
     </div>
-
 </div>
-
 </div>
 </body>
 </html>

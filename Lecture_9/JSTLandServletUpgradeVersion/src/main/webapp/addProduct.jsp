@@ -63,7 +63,7 @@
                 </fieldset>
 
                 <button type="submit" class="btn btn-success">Save</button>
-                <button type="reset" class="btn btn-warning"><a href="${pageContext.request.contextPath}/ProductServlet?action=reload">Cancel</a></button>
+                <button type="reset" class="btn btn-secondary"><a href="${pageContext.request.contextPath}/ProductServlet?action=reload">Cancel</a></button>
             </form>
         </div>
     </div>

@@ -20,7 +20,7 @@
             color: #566787;
             background: #f5f5f5;
             font-family: 'Varela Round', sans-serif;
-            font-size: 15px;
+            font-size: 17px;
         }
         a,a:hover{
             text-decoration: none;
@@ -63,7 +63,7 @@
                 </fieldset>
 
                 <button type="submit" class="btn btn-success">Save</button>
-                <button type="reset" class="btn btn-warning"><a href="${pageContext.request.contextPath}/ProductServlet?action=reload">Cancel</a></button>
+                <button type="reset" class="btn btn-secondary"><a href="${pageContext.request.contextPath}/ProductServlet?action=reload">Cancel</a></button>
             </form>
         </div>
     </div>

@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @WebServlet(name = "ProductServlet", value = "/ProductServlet")
-public class ProductServlet extends HttpServlet {
-//    private final ArrayList<Product> products = new ArrayList<>();
+public class ProductServlet extends HttpServlet implements Serializable {
     ProductManager productManager = new ProductManager();
-
     private final Validation validation = new Validation();
 
     @Override
@@ -44,6 +43,7 @@ public class ProductServlet extends HttpServlet {
                 Double price = Double.parseDouble(request.getParameter("price"));
                 Integer quantity = Integer.parseInt(request.getParameter("quantity"));
                 products.add(new Product(name, price, quantity));
+                productManager.getFile().writeToFile(products, productManager.getFilePath());
                 break;
             case "update":
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -51,6 +51,7 @@ public class ProductServlet extends HttpServlet {
                 String productName = products.get(index).getName();
                 Double productPrice = products.get(index).getPrice();
                 Integer productQuantity = products.get(index).getQuantity();
+                request.setAttribute("id", id);
                 request.setAttribute("index", index);
                 request.setAttribute("name", productName);
                 request.setAttribute("price", productPrice);
@@ -59,28 +60,33 @@ public class ProductServlet extends HttpServlet {
                 rd.forward(request, response);
                 break;
             case "updateX":
+                int idToUpdate = Integer.parseInt(request.getParameter("id"));
                 int indexToUpdate = Integer.parseInt(request.getParameter("index"));
+                String newName = new String();
+                if (newName.isEmpty()) {
+                    newName = products.get(indexToUpdate).getName();
+                } else {
+                    newName = request.getParameter("newName");
+                }
+                Double newPrice;
+                if (validation.parseDouble(request.getParameter("newPrice")) == null || request.getParameter("newPrice").isEmpty()) {
+                    newPrice = products.get(indexToUpdate).getPrice();
+                } else {
+                    newPrice = Double.parseDouble(request.getParameter("newPrice"));
+                }
 
-                if (validation.parseDouble(request.getParameter("newPrice")) == null) {
-                    printWriter.println("<script type=\"text/javascript\">");
-                    printWriter.println("alert('Wrong input')");
-                    printWriter.println("window.location.href = \"updateProduct.jsp\";");
-                    printWriter.println("</script>");
+                Integer newQuantity;
+                if (!validation.checkInteger(request.getParameter("newQuantity")) || request.getParameter("newQuantity").isEmpty()) {
+                    newQuantity = products.get(indexToUpdate).getQuantity();
+                } else {
+                    newQuantity = Integer.parseInt(request.getParameter("newQuantity"));
                 }
-                if (!validation.checkInteger(request.getParameter("newQuantity"))) {
-                    printWriter.println("<script type=\"text/javascript\">");
-                    printWriter.println("alert('Wrong input')");
-                    printWriter.println("window.location.href = \"updateProduct.jsp\";");
-                    printWriter.println("</script>");
-                }
-                String newName = request.getParameter("newName");
                 products.get(indexToUpdate).setName(newName);
 
-                Double newPrice = Double.parseDouble(request.getParameter("newPrice"));
                 products.get(indexToUpdate).setPrice(newPrice);
 
-                Integer newQuantity = Integer.parseInt(request.getParameter("newQuantity"));
                 products.get(indexToUpdate).setQuantity(newQuantity);
+                productManager.getFile().writeToFile(products, productManager.getFilePath());
                 break;
             case "delete":
                 int idToDel = Integer.parseInt(request.getParameter("id"));
@@ -98,7 +104,8 @@ public class ProductServlet extends HttpServlet {
             case "deleteX":
                 int indexX = Integer.parseInt(request.getParameter("index"));
                 products.remove(indexX);
-                reload(request,response);
+                productManager.getFile().writeToFile(products, productManager.getFilePath());
+                reload(request, response);
                 break;
             case "reload":
                 reload(request, response);
@@ -127,7 +134,8 @@ public class ProductServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
 
     }
 }
