@@ -40,9 +40,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
-                        <span>Add New Employee</span></a>
-                    <%--                    <a href="#deleteProductModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i>--%>
-                    <%--                        <span>Delete</span></a>--%>
+                        <span>Add New Product</span></a>
                 </div>
 
             </div>
@@ -84,93 +82,59 @@
                            data-toggle="modal">
                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
-                    <div id="${p.getId()}d" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="${pageContext.request.contextPath}/products?action=delete" method="post">
-                                    <input type="text" name="id" value="${p.getId()}">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Delete Product</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to delete this Product</p>
-                                        <p class="text-warning"><small>This action cannot be undone.</small></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                        <input type="submit" class="btn btn-danger" value="Delete">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
 
-                    </div>
                     <div id="${p.getId()}v" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="viewProductModalLabel"></h4>
-                                <h3><c:out value="${p.getName()}"/></h3>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>ID</label>
-                                    <label>
-                                        <p><c:out value="${p.getId()}"/></p>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <label>
-                                        <p><c:out value="${viewedProduct.getName()}"/></p>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <label>
-                                        <p><c:out value="${viewedProduct.getPrice()}"/></p>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Quantity</label>
-                                    <label>
-                                        <p><c:out value="${viewedProduct.getQuantity()}"/></p>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <label>
-                                        <p><c:out value="${viewedProduct.getCategory().getName()}"/></p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-success" data-dismiss="modal" value="Close">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div id="${p.getId()}e" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="${pageContext.request.contextPath}/products?action=edit" method="post">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Update Product</h4>
+                                        <h4 class="modal-title">Product Information</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" name="name" value="${p.getName()}" required>
+                                            <input type="text" class="form-control" value="${p.getName()}" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Price</label>
-                                            <input type="text" class="form-control" name="price" value="${p.getPrice()}" required>
+                                            <input type="text" class="form-control" value="${p.getPrice()}$" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Quantity</label>
-                                            <input type="text" class="form-control" name="quantity" value="${p.getQuantity()}" required>
+                                            <input type="text" class="form-control" value="${p.getQuantity()}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <input type="text" class="form-control" value="${p.getCategory().getName()}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="button" class="btn btn-info" data-dismiss="modal" value="Close">
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="${p.getId()}e" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="${pageContext.request.contextPath}/products?action=update" method="post">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Update Product</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <input type="hidden" name="idToUpdate" value="${p.getId()}">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" name="newName" value="${p.getName()}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="text" class="form-control" name="newPrice" value="${p.getPrice()}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="text" class="form-control" name="newQuantity" value="${p.getQuantity()}" required>
                                         </div>
 <%--                                        <div class="form-group">--%>
 <%--                                            <label>Address</label>--%>
@@ -178,7 +142,7 @@
 <%--                                        </div>--%>
                                         <div class="form-group">
                                             <label>Category</label>
-                                            <select name="category" class="form-control">
+                                            <select name="newCategory" class="form-control">
                                                 <c:forEach items="${categories}" var="c">
                                                     <c:if test="${c.getId() != p.getCategory().getId()}">
                                                         <option value="${c.getId()}"><c:out value="${c.getName()}"/></option>
@@ -192,13 +156,34 @@
                                     </div>
                                     <div class="modal-footer">
                                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                        <input type="submit" class="btn btn-info" value="Save">
+                                        <input type="submit" class="btn btn-success" value="Save">
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </tr>
+                    <div id="${p.getId()}d" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="${pageContext.request.contextPath}/products?action=delete" method="post">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Product</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <input type="hidden" name="idToDel" value="${p.getId()}">
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete this Product ?</p>
+                                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div></tr>
             </c:forEach>
             </tbody>
         </table>
@@ -242,6 +227,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
