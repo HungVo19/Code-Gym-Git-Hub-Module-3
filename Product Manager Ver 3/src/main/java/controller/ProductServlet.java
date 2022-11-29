@@ -31,6 +31,9 @@ public class ProductServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "viewProduct":
+                viewProduct(request,response);
+                break;
             default:
                 displayProductsList(request, response);
         }
@@ -45,6 +48,12 @@ public class ProductServlet extends HttpServlet {
         switch (action) {
             case "create":
                 create(request, response);
+                break;
+            case "search":
+                search(request,response);
+                break;
+            case "delete":
+                delete(request,response);
                 break;
         }
     }
@@ -76,6 +85,29 @@ public class ProductServlet extends HttpServlet {
         Category category = productService.getCategoryService().findById(Long.valueOf(request.getParameter("category")));
         productService.save(new Product(name, price, quantity, category));
         response.sendRedirect("http://localhost:8080/products");
+    }
+
+    private void search(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("nameSearch");
+        ArrayList<Product> searchedProducts = productService.findByNameContaining(name);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list-product.jsp");
+        request.setAttribute("products",searchedProducts);
+        request.setAttribute("categories", productService.getCategoryService().findAll());
+        requestDispatcher.forward(request,response);
+    }
+
+    private void delete(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        productService.deleteById(id);
+        response.sendRedirect("http://localhost:8080/products");
+    }
+
+    private void viewProduct(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("idP"));
+        Product product = productService.findById(id);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list-product.jsp");
+        request.setAttribute("viewedProduct",product);
+        requestDispatcher.forward(request,response);
     }
 
 }
