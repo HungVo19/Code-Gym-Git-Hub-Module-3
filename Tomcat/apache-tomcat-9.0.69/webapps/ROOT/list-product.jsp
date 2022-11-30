@@ -73,7 +73,7 @@
                     <td><c:out value="${p.getQuantity()}"/></td>
                     <td><c:out value="${p.getCategory().getName()}"/></td>
                     <td>
-                        <a href="#${p.getId()}v" data-toggle="modal" >
+                        <a href="#${p.getId()}v" data-toggle="modal">
                             <i class="material-icons" data-toggle="tooltip" title="Edit" style="color:cadetblue">&#xe8f4;</i></a>
                         <a href="#${p.getId()}e" class="edit" id="${p.getId()}"
                            data-toggle="modal">
@@ -82,93 +82,104 @@
                            data-toggle="modal">
                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
-
+<%--                    //viewModal--%>
                     <div id="${p.getId()}v" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Product Information</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Product Information</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" value="${p.getName()}" readonly>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" value="${p.getName()}" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Price</label>
-                                            <input type="text" class="form-control" value="${p.getPrice()}$" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Quantity</label>
-                                            <input type="text" class="form-control" value="${p.getQuantity()}" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Category</label>
-                                            <input type="text" class="form-control" value="${p.getCategory().getName()}" readonly>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="text" class="form-control" value="${p.getPrice()}$" readonly>
                                     </div>
-                                    <div class="modal-footer">
-                                        <input type="button" class="btn btn-info" data-dismiss="modal" value="Close">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="text" class="form-control" value="${p.getQuantity()}" readonly>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <input type="text" class="form-control" value="${p.getCategory().getName()}"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-info" data-dismiss="modal" value="Close">
+                                </div>
                             </div>
                         </div>
                     </div>
+<%--                    //editModal--%>
                     <div id="${p.getId()}e" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form action="${pageContext.request.contextPath}/products?action=update" method="post">
                                     <div class="modal-header">
                                         <h4 class="modal-title">Update Product</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
                                     </div>
                                     <input type="hidden" name="idToUpdate" value="${p.getId()}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" name="newName" value="${p.getName()}" required>
+                                            <input type="text" class="form-control" name="newName"
+                                                   value="${p.getName()}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Price</label>
-                                            <input type="text" class="form-control" name="newPrice" value="${p.getPrice()}" required>
+                                            <input type="text" class="form-control" name="newPrice"
+                                                   value="${p.getPrice()}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Quantity</label>
-                                            <input type="text" class="form-control" name="newQuantity" value="${p.getQuantity()}" required>
+                                            <input type="text" class="form-control" name="newQuantity"
+                                                   value="${p.getQuantity()}" required>
                                         </div>
-<%--                                        <div class="form-group">--%>
-<%--                                            <label>Address</label>--%>
-<%--                                            <textarea class="form-control" required></textarea>--%>
-<%--                                        </div>--%>
                                         <div class="form-group">
                                             <label>Category</label>
                                             <select name="newCategory" class="form-control">
                                                 <c:forEach items="${categories}" var="c">
                                                     <c:if test="${c.getId() != p.getCategory().getId()}">
-                                                        <option value="${c.getId()}"><c:out value="${c.getName()}"/></option>
+                                                        <option value="${c.getId()}"><c:out
+                                                                value="${c.getName()}"/></option>
                                                     </c:if>
                                                     <c:if test="${c.getId() == p.getCategory().getId()}">
-                                                        <option selected value="${c.getId()}"><c:out value="${c.getName()}"/></option>
+                                                        <option selected value="${c.getId()}"><c:out
+                                                                value="${c.getName()}"/></option>
                                                     </c:if>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal"
+                                               value="Cancel">
                                         <input type="submit" class="btn btn-success" value="Save">
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+<%--                    //deleteModal--%>
                     <div id="${p.getId()}d" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form action="${pageContext.request.contextPath}/products?action=delete" method="post">
                                     <div class="modal-header">
                                         <h4 class="modal-title">Delete Product</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
                                     </div>
                                     <input type="hidden" name="idToDel" value="${p.getId()}">
                                     <div class="modal-body">
@@ -176,19 +187,22 @@
                                         <p class="text-warning"><small>This action cannot be undone.</small></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal"
+                                               value="Cancel">
                                         <input type="submit" class="btn btn-danger" value="Delete">
                                     </div>
                                 </form>
                             </div>
                         </div>
 
-                    </div></tr>
+                    </div>
+                </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
+<%--adModal--%>
 <div id="addProductModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">

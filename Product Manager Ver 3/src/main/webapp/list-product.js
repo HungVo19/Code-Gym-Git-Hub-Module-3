@@ -1,5 +1,3 @@
+function success() {
 
-
-function openDeleteModal(id) {
-    document.getElementById("d-id").value = id;
 }
